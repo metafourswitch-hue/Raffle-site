@@ -1,0 +1,13 @@
+<svg width="1000" height="800" viewBox="0 0 1000 800" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1000" height="800" rx="48" fill="#020617"/>
+  <circle cx="210" cy="155" r="190" fill="#38BDF8" fill-opacity="0.18"/>
+  <circle cx="830" cy="670" r="230" fill="#22C55E" fill-opacity="0.14"/>
+  <rect x="310" y="90" width="380" height="620" rx="42" fill="#111827" stroke="#94A3B8" stroke-width="10"/>
+  <rect x="352" y="140" width="296" height="520" rx="28" fill="#020617" stroke="#334155" stroke-width="8"/>
+  <circle cx="500" cy="270" r="92" fill="#0F172A" stroke="#38BDF8" stroke-width="14"/>
+  <circle cx="500" cy="270" r="46" fill="#38BDF8" fill-opacity="0.55"/>
+  <circle cx="500" cy="520" r="92" fill="#0F172A" stroke="#22C55E" stroke-width="14"/>
+  <circle cx="500" cy="520" r="46" fill="#22C55E" fill-opacity="0.55"/>
+  <rect x="384" y="384" width="232" height="36" rx="18" fill="#FACC15"/>
+  <text x="500" y="760" text-anchor="middle" fill="#F8FAFC" font-size="54" font-family="Arial, sans-serif" font-weight="800">ADD PC PHOTO</text>
+</svg>

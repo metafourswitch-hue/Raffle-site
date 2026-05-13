@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PC Raffle</title>
+  <style>
+    :root {
+      --bg: #080b14;
+      --card: rgba(18, 25, 43, 0.92);
+      --card-soft: rgba(30, 41, 59, 0.72);
+      --text: #f8fafc;
+      --muted: #cbd5e1;
+      --line: rgba(148, 163, 184, 0.24);
+      --accent: #38bdf8;
+      --accent-2: #22c55e;
+      --warning: #facc15;
+      --shadow: 0 20px 60px rgba(0,0,0,0.35);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background:
+        radial-gradient(circle at top left, rgba(56,189,248,0.22), transparent 30%),
+        radial-gradient(circle at bottom right, rgba(34,197,94,0.18), transparent 32%),
+        var(--bg);
+      color: var(--text);
+      font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    a {
+      color: inherit;
+    }
+
+    .page {
+      width: min(1120px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 34px 0 48px;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 28px;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 900;
+      letter-spacing: -0.04em;
+      font-size: 1.35rem;
+    }
+
+    .logo-mark {
+      width: 42px;
+      height: 42px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      display: grid;
+      place-items: center;
+      color: #020617;
+      font-weight: 1000;
+      box-shadow: 0 14px 30px rgba(56,189,248,0.22);
+    }
+
+    .nav-link {
+      color: var(--muted);
+      text-decoration: none;
+      font-weight: 800;
+      border: 1px solid var(--line);
+      padding: 10px 14px;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.62);
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 24px;
+      align-items: stretch;
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 28px;
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .hero-copy {
+      padding: clamp(26px, 5vw, 52px);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .eyebrow {
+      width: fit-content;
+      color: #02111e;
+      background: var(--warning);
+      border-radius: 999px;
+      padding: 8px 12px;
+      font-weight: 950;
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 18px;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(2.5rem, 7vw, 5.4rem);
+      line-height: 0.92;
+      letter-spacing: -0.085em;
+    }
+
+    .lead {
+      color: var(--muted);
+      font-size: clamp(1rem, 2vw, 1.22rem);
+      line-height: 1.55;
+      margin: 22px 0 0;
+      max-width: 58ch;
+      font-weight: 600;
+    }
+
+    .button-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 28px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      border-radius: 999px;
+      padding: 14px 20px;
+      font-weight: 950;
+      transition: transform 120ms ease, filter 120ms ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+      filter: brightness(1.05);
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: #02111e;
+      box-shadow: 0 16px 34px rgba(56,189,248,0.24);
+    }
+
+    .btn-secondary {
+      background: rgba(148, 163, 184, 0.15);
+      border: 1px solid var(--line);
+      color: var(--text);
+    }
+
+    .pc-image-card {
+      position: relative;
+      min-height: 460px;
+      display: grid;
+      place-items: center;
+      padding: 22px;
+      background:
+        linear-gradient(135deg, rgba(56,189,248,0.12), rgba(34,197,94,0.08)),
+        var(--card);
+    }
+
+    .pc-image-card img {
+      width: 100%;
+      height: 100%;
+      max-height: 540px;
+      object-fit: contain;
+      border-radius: 22px;
+      background: rgba(2, 6, 23, 0.4);
+    }
+
+    .floating-tag {
+      position: absolute;
+      left: 24px;
+      bottom: 24px;
+      background: rgba(2, 6, 23, 0.84);
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 10px 14px;
+      color: var(--muted);
+      font-weight: 900;
+      backdrop-filter: blur(10px);
+    }
+
+    section {
+      margin-top: 24px;
+    }
+
+    .section-title {
+      font-size: clamp(1.6rem, 3vw, 2.45rem);
+      letter-spacing: -0.06em;
+      margin: 0 0 14px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+    }
+
+    .spec {
+      background: var(--card-soft);
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      padding: 18px;
+    }
+
+    .spec small {
+      display: block;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.09em;
+      font-weight: 900;
+      font-size: 0.75rem;
+      margin-bottom: 7px;
+    }
+
+    .spec strong {
+      display: block;
+      font-size: 1.12rem;
+      line-height: 1.25;
+    }
+
+    .info-card {
+      padding: 26px;
+    }
+
+    .info-card p {
+      color: var(--muted);
+      line-height: 1.6;
+      font-weight: 600;
+      margin: 0;
+    }
+
+    .footer {
+      color: var(--muted);
+      text-align: center;
+      font-size: 0.9rem;
+      margin-top: 28px;
+    }
+
+    @media (max-width: 850px) {
+      header {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .hero {
+        grid-template-columns: 1fr;
+      }
+
+      .pc-image-card {
+        min-height: 320px;
+      }
+
+      .grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header>
+      <div class="logo">
+        <div class="logo-mark">PC</div>
+        <span>Jackson PC Raffle</span>
+      </div>
+
+      <!-- CHANGE THIS LINK to your actual livestream URL -->
+      <a class="nav-link" href="https://www.youtube.com/watch?v=M5OKNwczOP8" target="_blank" rel="noopener">
+        Watch the stream
+      </a>
+    </header>
+
+    <main class="hero">
+      <div class="card hero-copy">
+        <div class="eyebrow">Live PC Raffle</div>
+        <h1>Win this custom PC.</h1>
+        <p class="lead">
+          Enter the raffle, watch the elimination wheel live, and see who takes home the build.
+          The final winner will be selected live on stream.
+        </p>
+
+        <div class="button-row">
+          <!-- CHANGE THIS LINK to your actual livestream URL -->
+          <a class="btn btn-primary" href="https://www.youtube.com/watch?v=M5OKNwczOP8" target="_blank" rel="noopener">
+            Watch livestream
+          </a>
+
+          <a class="btn btn-secondary" href="#specs">
+            View specs
+          </a>
+        </div>
+      </div>
+
+      <div class="card pc-image-card">
+        <!-- Replace pc-placeholder.svg with your real PC image, for example pc.jpg -->
+        <img src="PC pic.jpg" alt="Raffle PC" />
+        <div class="floating-tag">Gaming CPU: 5600GT</div>
+      </div>
+    </main>
+
+    <section id="specs" class="card info-card">
+      <h2 class="section-title">PC Specs</h2>
+
+      <div class="grid">
+        <div class="spec">
+          <small>CPU</small>
+          <strong>AMD Ryzen 5 5600GT</strong>
+        </div>
+
+	 <div class="spec">
+          <small>CPU Speed</small>
+          <strong>3.6 GHz</strong>
+        </div>
+
+	 <div class="spec">
+          <small>CPU Boost Speed</small>
+          <strong>4.6 GHz</strong>
+        </div>
+
+        <div class="spec">
+          <small>Graphics</small>
+          <strong>Integrated Radeon Graphics</strong>
+        </div>
+
+        <div class="spec">
+          <small>Memory</small>
+          <strong>16 GB DDR4 RAM</strong>
+        </div>
+
+        <div class="spec">
+          <small>Storage</small>
+          <strong>256Gb NVMe SSD</strong>
+        </div>
+
+	 <div class="spec">
+          <small>Power Supply</small>
+          <strong>600W</strong>
+        </div>
+
+
+        <div class="spec">
+          <small>Operating System</small>
+          <strong>Windows 11</strong>
+        </div>
+
+        <div class="spec">
+          <small>Extras</small>
+          <strong>Ready for school, gaming, and upgrades</strong>
+        </div>
+      </div>
+    </section>
+
+    <section class="card info-card">
+      <h2 class="section-title">How the raffle works</h2>
+      <p>
+        The raffle will be run live using an elimination wheel. Names are removed one by one until only
+        one winner remains. Watch the stream so you can follow the whole thing live.
+      </p>
+    </section>
+
+    <div class="footer">
+      Got questions? For anything, email me at metafourswitch@gmail.com VERSION: 1.0.0
+    </div>
+  </div>
+</body>
+</html>
